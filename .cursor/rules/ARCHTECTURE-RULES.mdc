@@ -1,0 +1,105 @@
+---
+alwaysApply: true
+description: "Architecture structure, module boundaries, and progressive documentation loading for parking-management
+---
+
+# Parking Management Architecture Principles
+
+**Module Structure (Monolith Modular)**
+The solution will be implemented as a **modular monolith**, organized by business domain.
+
+### Business Modules
+- `shared`
+- `garage`
+- `webhook`
+- `parking`
+- `revenue`
+
+Each module contains clear internal separation of responsibilities across:
+- `api`
+- `application`
+- `domain`
+- `infrastructure`
+### Package Structure
+
+com.estapar.parking_management
+├── shared
+│   ├── config
+│   ├── exception
+│   └── util
+├── garage
+│   ├── application
+│   │   └── port
+│   ├── domain
+│   └── infrastructure
+│       └── persistence
+│           ├── entity
+│           ├── mapper
+│           └── repository
+│               └── adapter
+├── webhook
+│   ├── api
+│   │   └── dto
+│   └── application
+├── parking
+│   ├── api
+│   │   └── dto
+│   ├── application
+│   ├── domain
+│   └── infrastructure
+└── revenue
+    ├── api
+    │   └── dto
+    ├── application
+    ├── domain
+    └── infrastructure
+
+
+## 10 Key Principles
+
+1. Organize code by business capability or domain, not by global technical layers.
+2. Keep responsibilities explicitly separated across API, application, domain, and infrastructure concerns.
+3. Keep controllers, consumers, and handlers thin; they must not contain business rules.
+4. Centralize business use cases in focused application services or use-case classes.
+5. Model important business concepts, states, and transitions explicitly.
+6. Prefer simplicity over speculative abstraction; every abstraction must solve a real problem.
+7. Isolate persistence, external integrations, and framework-specific concerns from core business logic.
+8. Design for consistency first, using proper validation, transaction boundaries, and concurrency protection where required.
+9. Make contracts explicit: inputs, outputs, errors, and validation rules must be clear and predictable.
+10. Optimize for readability, maintainability, and safe evolution over cleverness or unnecessary complexity.
+
+### Separação Domínio vs Persistência
+
+O domínio permanece **livre de JPA e frameworks**:
+
+- **domain/**: entidades POJO puras com regras de negócio, invariantes e comportamentos
+- **application/port/**: interfaces (Ports) que definem contratos de persistência
+- **infrastructure/persistence/**:
+  - **entity/**: entidades JPA (`*Entity`) com anotações de mapeamento
+  - **mapper/**: conversão entre entidades JPA e objetos de domínio
+  - **repository/**: `*JpaRepository` (Spring Data) + **adapter/**: implementações dos Ports
+
+Os serviços de aplicação dependem dos **Ports**, não dos repositórios JPA diretamente.
+
+## Never Do
+
+- Never put business logic in controllers, handlers, or consumers.
+- Never couple core business logic directly to framework or infrastructure code.
+- Never introduce abstractions without a concrete reason.
+- Never mix unrelated responsibilities in the same class.
+- Never optimize prematurely at the cost of clarity and correctness.
+- Never bypass validation, consistency, or transaction rules in critical business flows.
+
+## Progressive Documentation Loading 🧠 
+
+**CRITICAL**: Only load documents relevant to your current task. Do NOT load all documentation at once.
+
+### Decision Tree: What to read(Priority Order)
+
+**Start here for navigation:**
+
+- **Understanding overall architecture or project definitons or starting new work:
+- READ `docs/parking-garage-tdd-complete.md`
+
+**Core informations**
+- READ `AGENTS.md` when you need.

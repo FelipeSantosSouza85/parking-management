@@ -1,0 +1,6 @@
+# java-unit-testing index
+
+## Chunks
+
+- `docs/java-unit-testing/chunk-01.md` (446 lines) — intro | Role | Goal | Constraints | Examples | Examples - Table of contents | Examples - Example 1: Use JUnit 5 Annotations | Examples - Example 2: Use AssertJ for Assertions | Examples - Example 3: Structure Tests with Given-When-Then | Examples - Example 4: Use Descriptive Test Names | Examples - Example 5: Aim for Single Responsibility in Tests | Examples - Example 6: Ensure Tests are Independent | Examples - Example 7: Use Parameterized Tests for Data Variations
+- `docs/java-unit-testing/chunk-02.md` (367 lines) — Examples - Example 8: Utilize Mocking for Dependencies (Mockito) | Examples - Example 9: Consider Test Coverage, But Don't Obsess | Examples - Example 10: Test Scopes | Examples - Example 11: Code Splitting Strategies | Examples - Example 12: Anti-patterns and Code Smells | Examples - Example 13: State Management | Examples - Example 14: Error Handling | Examples - Example 15: Leverage JSpecify for Null Safety | Examples - Example 16: Key Questions to Guide Test Creation (RIGHT-BICEP) | Examples - Example 17: Characteristics of Good Tests (A-TRIP) | Examples - Example 18: Verifying CORRECT Boundary Conditions | Output Format | Safeguards
