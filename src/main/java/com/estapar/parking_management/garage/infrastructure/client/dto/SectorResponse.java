@@ -3,7 +3,7 @@ package com.estapar.parking_management.garage.infrastructure.client.dto;
 import java.math.BigDecimal;
 
 /**
- * DTO para representar um setor retornado pelo simulador.
+ * DTO representing a sector returned by the simulator.
  */
 public record SectorResponse(
         String sector,

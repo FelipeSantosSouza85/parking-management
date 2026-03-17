@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClientException;
 import java.util.Collections;
 
 /**
- * Cliente HTTP para comunicação com o simulador de garagem.
+ * HTTP client for communication with the garage simulator.
  */
 @Component
 public class GarageSimulatorClient {

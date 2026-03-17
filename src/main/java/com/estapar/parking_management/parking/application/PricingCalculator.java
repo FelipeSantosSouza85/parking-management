@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 import java.time.Duration;
 
 /**
- * Serviço de cálculo de precificação de estacionamento.
- * Aplica tolerância de 30 minutos, arredondamento para cima de horas e ajuste dinâmico por ocupação.
+ * Parking pricing calculation service.
+ * Applies 30-minute tolerance, ceiling rounding of hours, and dynamic adjustment by occupancy.
  */
 @Component
 public class PricingCalculator {
@@ -23,11 +23,11 @@ public class PricingCalculator {
     private static final RoundingMode ROUNDING_MODE = RoundingMode.HALF_UP;
 
     /**
-     * Calcula as horas cobráveis considerando tolerância de 30 minutos.
-     * Até 30 minutos = gratuito (0 horas). Acima disso, arredonda para cima.
+     * Calculates chargeable hours considering 30-minute tolerance.
+     * Up to 30 minutes = free (0 hours). Above that, rounds up.
      *
-     * @param parkingDuration duração do estacionamento
-     * @return número de horas cobráveis (0 ou mais)
+     * @param parkingDuration parking duration
+     * @return number of chargeable hours (0 or more)
      */
     public int calculateChargeableHours(Duration parkingDuration) {
         if (parkingDuration == null) {
@@ -45,12 +45,12 @@ public class PricingCalculator {
     }
 
     /**
-     * Calcula o preço por hora aplicado com base no preço base e taxa de ajuste.
-     * Fórmula: hourlyPrice = basePrice * (1 + adjustmentRate)
+     * Calculates the applied hourly price based on base price and adjustment rate.
+     * Formula: hourlyPrice = basePrice * (1 + adjustmentRate)
      *
-     * @param basePrice      preço base por hora
-     * @param adjustmentRate taxa de ajuste (ex: -0.10, 0.00, 0.10, 0.25)
-     * @return preço por hora final
+     * @param basePrice      base price per hour
+     * @param adjustmentRate adjustment rate (e.g. -0.10, 0.00, 0.10, 0.25)
+     * @return final hourly price
      */
     public BigDecimal calculateHourlyPrice(BigDecimal basePrice, BigDecimal adjustmentRate) {
         if (basePrice == null) {
@@ -67,12 +67,12 @@ public class PricingCalculator {
     }
 
     /**
-     * Calcula o valor total cobrado.
-     * Fórmula: chargedAmount = hourlyPrice * chargeableHours
+     * Calculates the total charged amount.
+     * Formula: chargedAmount = hourlyPrice * chargeableHours
      *
-     * @param hourlyPrice     preço por hora aplicado
-     * @param chargeableHours número de horas cobráveis
-     * @return valor total cobrado (ZERO se horas = 0)
+     * @param hourlyPrice     applied hourly price
+     * @param chargeableHours number of chargeable hours
+     * @return total charged amount (ZERO if hours = 0)
      */
     public BigDecimal calculateChargedAmount(BigDecimal hourlyPrice, int chargeableHours) {
         if (hourlyPrice == null) {

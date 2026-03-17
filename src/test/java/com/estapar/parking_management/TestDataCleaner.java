@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Helper para limpeza de dados em testes de integração.
- * Usa REQUIRES_NEW para que a limpeza seja commitada mesmo quando o teste usa @Transactional com rollback.
+ * Helper for data cleanup in integration tests.
+ * Uses REQUIRES_NEW so cleanup is committed even when the test uses @Transactional with rollback.
  */
 public class TestDataCleaner {
 

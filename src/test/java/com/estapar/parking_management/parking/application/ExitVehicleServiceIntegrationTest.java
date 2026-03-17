@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Import(TestcontainersConfiguration.class)
 @ActiveProfiles("test")
 @Transactional
-@DisplayName("ExitVehicleService (integração)")
+@DisplayName("ExitVehicleService (integration)")
 class ExitVehicleServiceIntegrationTest {
 
     private static final String LICENSE_PLATE = "ZUL0001";
@@ -89,11 +89,11 @@ class ExitVehicleServiceIntegrationTest {
     }
 
     @Nested
-    @DisplayName("EXIT com sucesso (PARKED -> EXITED)")
+    @DisplayName("EXIT successfully (PARKED -> EXITED)")
     class ExitComSucessoParked {
 
         @Test
-        @DisplayName("Fluxo completo: ENTRY -> PARKED -> EXIT")
+        @DisplayName("Full flow: ENTRY -> PARKED -> EXIT")
         void fluxoCompletoEntryParkedExit() {
             entryVehicleService.processEntry(LICENSE_PLATE, ENTRY_TIME);
             parkVehicleService.processParked(LICENSE_PLATE, SPOT_LAT, SPOT_LNG);
@@ -112,7 +112,7 @@ class ExitVehicleServiceIntegrationTest {
         }
 
         @Test
-        @DisplayName("Verifica persistência real: status EXITED, chargedAmount calculado, exitTime definido")
+        @DisplayName("Verifies real persistence: status EXITED, chargedAmount calculated, exitTime set")
         void verificaPersistenciaRealStatusEChargedAmount() {
             entryVehicleService.processEntry(LICENSE_PLATE, ENTRY_TIME);
             parkVehicleService.processParked(LICENSE_PLATE, SPOT_LAT, SPOT_LNG);

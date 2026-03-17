@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 /**
- * Serviço responsável por processar a entrada de veículos na garagem.
- * Centraliza as regras de negócio do use case ENTRY.
+ * Service responsible for processing vehicle entries into the garage.
+ * Centralizes business rules for the ENTRY use case.
  */
 @Service
 public class EntryVehicleService {
@@ -42,15 +42,15 @@ public class EntryVehicleService {
     }
 
     /**
-     * Processa a entrada de um veículo na garagem.
-     * Fluxo completo dentro de uma única transação.
+     * Processes a vehicle entry into the garage.
+     * Full flow within a single transaction.
      *
-     * @param licensePlate placa do veículo
-     * @param entryTime    data/hora da entrada (convertida para Instant UTC internamente)
-     * @throws ValidationException                  se licensePlate ou entryTime forem inválidos
-     * @throws ActiveSessionAlreadyExistsException  se já existir sessão ativa para a placa
-     * @throws IllegalStateException                se GarageOccupancy não for encontrada
-     * @throws com.estapar.parking_management.shared.exception.GarageFullException se a garagem estiver cheia
+     * @param licensePlate vehicle license plate
+     * @param entryTime    entry date/time (converted to Instant UTC internally)
+     * @throws ValidationException                  if licensePlate or entryTime are invalid
+     * @throws ActiveSessionAlreadyExistsException  if an active session already exists for the plate
+     * @throws IllegalStateException                if GarageOccupancy is not found
+     * @throws com.estapar.parking_management.shared.exception.GarageFullException if the garage is full
      */
     @Transactional
     public void processEntry(String licensePlate, LocalDateTime entryTime) {

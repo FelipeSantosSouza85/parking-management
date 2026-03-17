@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * Serviço responsável por processar o evento PARKED.
- * Associa o veículo (com sessão ENTERED) a uma vaga física identificada por coordenadas lat/lng.
+ * Service responsible for processing the PARKED event.
+ * Associates the vehicle (with ENTERED session) to a physical spot identified by lat/lng coordinates.
  */
 @Service
 public class ParkVehicleService {
@@ -42,16 +42,16 @@ public class ParkVehicleService {
     }
 
     /**
-     * Processa o evento PARKED: associa a sessão ativa à vaga nas coordenadas informadas.
+     * Processes the PARKED event: associates the active session to the spot at the given coordinates.
      *
-     * @param licensePlate placa do veículo
-     * @param lat          latitude da vaga
-     * @param lng          longitude da vaga
-     * @throws ValidationException                   se licensePlate, lat ou lng forem inválidos
-     * @throws ActiveSessionNotFoundException       se não existir sessão ativa para a placa
-     * @throws InvalidSessionTransitionException     se o status da sessão não for ENTERED
-     * @throws SpotNotFoundException                 se não existir vaga nas coordenadas
-     * @throws SpotAlreadyOccupiedException          se a vaga já estiver ocupada
+     * @param licensePlate vehicle license plate
+     * @param lat          spot latitude
+     * @param lng          spot longitude
+     * @throws ValidationException                   if licensePlate, lat or lng are invalid
+     * @throws ActiveSessionNotFoundException       if no active session exists for the plate
+     * @throws InvalidSessionTransitionException     if session status is not ENTERED
+     * @throws SpotNotFoundException                 if no spot exists at the coordinates
+     * @throws SpotAlreadyOccupiedException          if the spot is already occupied
      */
     @Transactional
     public void processParked(String licensePlate, Double lat, Double lng) {

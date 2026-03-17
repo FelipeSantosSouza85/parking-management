@@ -31,8 +31,8 @@ import java.time.ZoneOffset;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Testes de idempotência por estado de sessão.
- * Rejeição correta de operações repetidas/inválidas conforme o estado atual.
+ * Idempotency tests by session state.
+ * Correct rejection of repeated/invalid operations according to current state.
  */
 @SpringBootTest
 @Import(TestcontainersConfiguration.class)
@@ -84,7 +84,7 @@ class SessionStateIdempotencyTest {
     }
 
     @Nested
-    @DisplayName("ENTRY duplicada para mesma placa")
+    @DisplayName("Duplicate ENTRY for same plate")
     class EntryDuplicada {
 
         @Test
@@ -99,7 +99,7 @@ class SessionStateIdempotencyTest {
     }
 
     @Nested
-    @DisplayName("PARKED em sessão já PARKED")
+    @DisplayName("PARKED on session already PARKED")
     class ParkedEmSessaoJaParked {
 
         @Test
@@ -131,7 +131,7 @@ class SessionStateIdempotencyTest {
     }
 
     @Nested
-    @DisplayName("PARKED em sessão já EXITED")
+    @DisplayName("PARKED on session already EXITED")
     class ParkedEmSessaoJaExited {
 
         @Test

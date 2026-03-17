@@ -23,11 +23,11 @@ class ParkingSpotTest {
     }
 
     @Nested
-    @DisplayName("Criação")
+    @DisplayName("Creation")
     class Creation {
 
         @Test
-        @DisplayName("deve criar spot desocupado por padrão")
+        @DisplayName("should create unoccupied spot by default")
         void shouldCreateSpotUnoccupiedByDefault() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 
@@ -39,7 +39,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar externalSpotId nulo")
+        @DisplayName("should reject null externalSpotId")
         void shouldRejectNullExternalSpotId() {
             assertThatThrownBy(() -> new ParkingSpot(null, sector, -23.55, -46.63, false))
                     .isInstanceOf(NullPointerException.class)
@@ -47,7 +47,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar sector nulo")
+        @DisplayName("should reject null sector")
         void shouldRejectNullSector() {
             assertThatThrownBy(() -> new ParkingSpot(1, null, -23.55, -46.63, false))
                     .isInstanceOf(NullPointerException.class)
@@ -55,7 +55,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar lat nulo")
+        @DisplayName("should reject null lat")
         void shouldRejectNullLat() {
             assertThatThrownBy(() -> new ParkingSpot(1, sector, null, -46.63, false))
                     .isInstanceOf(NullPointerException.class)
@@ -63,7 +63,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar lng nulo")
+        @DisplayName("should reject null lng")
         void shouldRejectNullLng() {
             assertThatThrownBy(() -> new ParkingSpot(1, sector, -23.55, null, false))
                     .isInstanceOf(NullPointerException.class)
@@ -76,7 +76,7 @@ class ParkingSpotTest {
     class UpdateFrom {
 
         @Test
-        @DisplayName("deve atualizar todos os campos mantendo id e externalSpotId")
+        @DisplayName("should update all fields preserving id and externalSpotId")
         void shouldUpdateAllFieldsPreservingIdentity() {
             // Given
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
@@ -97,7 +97,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar sector nulo no updateFrom")
+        @DisplayName("should reject null sector in updateFrom")
         void shouldRejectNullSectorOnUpdate() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 
@@ -107,7 +107,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve atualizar occupied para false via updateFrom")
+        @DisplayName("should update occupied to false via updateFrom")
         void shouldUpdateOccupiedToFalse() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
             spot.occupy();
@@ -123,7 +123,7 @@ class ParkingSpotTest {
     class Occupy {
 
         @Test
-        @DisplayName("deve ocupar spot livre com sucesso")
+        @DisplayName("should occupy free spot successfully")
         void shouldOccupyFreeSpot() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 
@@ -133,7 +133,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve lançar exceção ao ocupar spot já ocupado")
+        @DisplayName("should throw exception when occupying already occupied spot")
         void shouldThrowWhenOccupyingAlreadyOccupiedSpot() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
             spot.occupy();
@@ -149,7 +149,7 @@ class ParkingSpotTest {
     class Release {
 
         @Test
-        @DisplayName("deve liberar spot ocupado com sucesso")
+        @DisplayName("should release occupied spot successfully")
         void shouldReleasedOccupiedSpot() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
             spot.occupy();
@@ -160,7 +160,7 @@ class ParkingSpotTest {
         }
 
         @Test
-        @DisplayName("deve lançar exceção ao liberar spot já livre")
+        @DisplayName("should throw exception when releasing free spot")
         void shouldThrowWhenReleasingFreeSpot() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 
@@ -171,11 +171,11 @@ class ParkingSpotTest {
     }
 
     @Nested
-    @DisplayName("Ciclo completo occupy/release")
+    @DisplayName("Full occupy/release cycle")
     class FullCycle {
 
         @Test
-        @DisplayName("deve permitir ocupar, liberar e ocupar novamente")
+        @DisplayName("should allow occupy, release and occupy again")
         void shouldAllowOccupyReleaseCycle() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 

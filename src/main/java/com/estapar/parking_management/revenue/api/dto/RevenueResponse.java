@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * DTO de resposta da API de receita por setor e data.
+ * Response DTO for the revenue API by sector and date.
  */
 public record RevenueResponse(BigDecimal amount, String currency, Instant timestamp) {
 }

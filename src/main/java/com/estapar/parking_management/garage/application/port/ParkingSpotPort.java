@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Port para operações de persistência de ParkingSpot.
- * Contrato usado pela camada de aplicação, implementado pela infraestrutura.
+ * Port for ParkingSpot persistence operations.
+ * Contract used by the application layer, implemented by infrastructure.
  */
 public interface ParkingSpotPort {
 

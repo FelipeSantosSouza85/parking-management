@@ -13,8 +13,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 /**
- * Repositório de query para agregação de receita por setor e data.
- * Consulta diretamente a tabela parking_session filtrando por status EXITED.
+ * Query repository for revenue aggregation by sector and date.
+ * Queries the parking_session table directly filtering by EXITED status.
  */
 @Repository
 public class RevenueRepository {

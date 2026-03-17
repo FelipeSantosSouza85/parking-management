@@ -5,15 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Instant;
 
 /**
- * DTO padrão para respostas de erro da API.
+ * Standard DTO for API error responses.
  */
-@Schema(description = "Resposta de erro da API")
+@Schema(description = "API error response")
 public record ApiErrorResponse(
-        @Schema(description = "Código do erro", example = "GARAGE_FULL")
+        @Schema(description = "Error code", example = "GARAGE_FULL")
         String code,
-        @Schema(description = "Mensagem descritiva do erro")
+        @Schema(description = "Descriptive error message")
         String message,
-        @Schema(description = "Timestamp do erro")
+        @Schema(description = "Error timestamp")
         Instant timestamp
 ) {
 }

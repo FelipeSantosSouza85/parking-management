@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando já existe uma sessão ativa para a placa informada.
+ * Exception thrown when an active session already exists for the given license plate.
  */
 public final class ActiveSessionAlreadyExistsException extends ConflictException {
 

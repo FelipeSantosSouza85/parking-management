@@ -14,5 +14,4 @@ services:
 
   garage-simulator:
     image: cfontes0estapar/garage-sim:1.0.0
-    ports:
-      - "3000:3000"
+    network_mode: host

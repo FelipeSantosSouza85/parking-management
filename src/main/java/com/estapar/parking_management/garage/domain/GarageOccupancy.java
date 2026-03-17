@@ -7,8 +7,8 @@ import java.math.RoundingMode;
 import java.time.Instant;
 
 /**
- * Entidade de domínio que representa a ocupação global da garagem.
- * POJO puro - sem dependências de framework ou persistência.
+ * Domain entity representing global garage occupancy.
+ * Pure POJO - no framework or persistence dependencies.
  */
 public class GarageOccupancy {
 

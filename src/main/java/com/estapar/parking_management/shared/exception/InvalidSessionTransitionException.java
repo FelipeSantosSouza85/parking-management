@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando uma transição de estado de sessão é inválida.
+ * Exception thrown when a session state transition is invalid.
  */
 public final class InvalidSessionTransitionException extends ConflictException {
 

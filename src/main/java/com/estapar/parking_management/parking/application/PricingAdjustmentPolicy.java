@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
- * Política de ajuste dinâmico de preço baseada na taxa de ocupação do estacionamento.
- * Singleton stateless que aplica a tabela de ajuste por faixa de ocupação.
+ * Dynamic price adjustment policy based on parking occupancy rate.
+ * Stateless singleton that applies the adjustment table by occupancy range.
  */
 @Component
 public class PricingAdjustmentPolicy {
@@ -25,11 +25,11 @@ public class PricingAdjustmentPolicy {
     private static final BigDecimal THRESHOLD_75 = new BigDecimal("0.75");
 
     /**
-     * Retorna a taxa de ajuste correspondente à taxa de ocupação informada.
+     * Returns the adjustment rate corresponding to the given occupancy rate.
      *
-     * @param occupancyRate taxa de ocupação
-     * @return taxa de ajuste: -0.10 (<25%), 0.00 [25%-50%], +0.10 (>= 50%-75%], +0.25 (>= 75%-100%]
-     * @throws IllegalArgumentException se occupancyRate for null, negativo ou maior que 1
+     * @param occupancyRate occupancy rate
+     * @return adjustment rate: -0.10 (<25%), 0.00 [25%-50%], +0.10 (>= 50%-75%], +0.25 (>= 75%-100%]
+     * @throws IllegalArgumentException if occupancyRate is null, negative, or greater than 1
      */
     public BigDecimal getAdjustmentRate(BigDecimal occupancyRate) {
         validateOccupancyRate(occupancyRate);

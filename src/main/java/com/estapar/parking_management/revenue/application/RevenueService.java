@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 /**
- * Serviço de aplicação que orquestra a consulta de receita por setor e data.
+ * Application service that orchestrates revenue queries by sector and date.
  */
 @Service
 public class RevenueService {

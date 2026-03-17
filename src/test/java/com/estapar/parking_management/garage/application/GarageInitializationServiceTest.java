@@ -25,7 +25,7 @@ class GarageInitializationServiceTest {
     }
 
     @Test
-    @DisplayName("deve sincronizar garagem no evento ApplicationReady")
+        @DisplayName("should synchronize garage on ApplicationReady event")
     void shouldSynchronizeGarageOnApplicationReady() {
         // When
         initializationService.onApplicationReady();
@@ -35,13 +35,13 @@ class GarageInitializationServiceTest {
     }
 
     @Test
-    @DisplayName("deve continuar sem lançar exceção quando sincronização falhar")
+        @DisplayName("should continue without throwing when synchronization fails")
     void shouldNotThrowWhenSynchronizationFails() {
         // Given
         doThrow(new GarageSimulatorException("Connection refused"))
                 .when(synchronizationService).synchronize();
 
-        // When/Then - não deve lançar exceção
+        // When/Then - should not throw exception
         initializationService.onApplicationReady();
 
         verify(synchronizationService).synchronize();

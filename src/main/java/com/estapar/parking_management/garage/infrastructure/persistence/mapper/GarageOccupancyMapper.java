@@ -33,8 +33,8 @@ public class GarageOccupancyMapper {
     }
 
     /**
-     * Atualiza o estado da entity com os dados do domain (para merge/update).
-     * Não altera id, createdAt.
+     * Updates the entity state with domain data (for merge/update).
+     * Does not change id, createdAt.
      */
     public void updateEntity(GarageOccupancyEntity entity, GarageOccupancy domain) {
         if (entity == null || domain == null) {

@@ -37,8 +37,8 @@ import com.estapar.parking_management.shared.exception.GarageFullException;
 import com.estapar.parking_management.shared.exception.SpotAlreadyOccupiedException;
 
 /**
- * Testes de concorrência real com threads.
- * NÃO usa @Transactional - cada thread precisa de transação commitada para locks pessimistas.
+ * Real concurrency tests with threads.
+ * Does NOT use @Transactional - each thread needs a committed transaction for pessimistic locks.
  */
 @SpringBootTest
 @Import(TestcontainersConfiguration.class)
@@ -81,11 +81,11 @@ class ParkingConcurrencyTest {
     }
 
     @Nested
-    @DisplayName("Dois ENTRY simultâneos com 1 vaga")
+    @DisplayName("Two simultaneous ENTRY with 1 spot")
     class DoisEntrySimultaneosComUmaVaga {
 
         @Test
-        @DisplayName("exatamente 1 sucesso, 1 GarageFullException, occupiedCount == 1")
+        @DisplayName("exactly 1 success, 1 GarageFullException, occupiedCount == 1")
         void doisEntrySimultaneos_exatamenteUmSucessoUmFalha() throws Exception {
             GarageOccupancy occupancy = new GarageOccupancy(1);
             garageOccupancyPort.save(occupancy);
@@ -204,11 +204,11 @@ class ParkingConcurrencyTest {
     }
 
     @Nested
-    @DisplayName("EXIT duplicado")
+    @DisplayName("Duplicate EXIT")
     class ExitDuplicado {
 
         @Test
-        @DisplayName("exatamente 1 sucesso, 1 falha, occupiedCount decrementado 1x")
+        @DisplayName("exactly 1 success, 1 failure, occupiedCount decremented 1x")
         void doisExitSimultaneos_exatamenteUmSucessoUmFalha() throws Exception {
             GarageOccupancy occupancy = new GarageOccupancy(100);
             occupancy.setOccupiedCount(30);
@@ -261,14 +261,14 @@ class ParkingConcurrencyTest {
             int successCount = 2 - results.size();
             int failureCount = results.size();
 
-            assertThat(successCount).as("exatamente 1 EXIT deve ter sucesso").isEqualTo(1);
-            assertThat(failureCount).as("exatamente 1 EXIT deve falhar").isEqualTo(1);
+            assertThat(successCount).as("exactly 1 EXIT must succeed").isEqualTo(1);
+            assertThat(failureCount).as("exactly 1 EXIT must fail").isEqualTo(1);
 
             transactionTemplate.executeWithoutResult(__ -> {
                 var occupancyAfter = garageOccupancyPort.findWithLock();
                 assertThat(occupancyAfter).isPresent();
                 assertThat(occupancyAfter.get().getOccupiedCount())
-                        .as("occupiedCount deve ser decrementado exatamente 1x")
+                        .as("occupiedCount must be decremented exactly 1x")
                         .isEqualTo(occupiedBefore - 1);
             });
         }

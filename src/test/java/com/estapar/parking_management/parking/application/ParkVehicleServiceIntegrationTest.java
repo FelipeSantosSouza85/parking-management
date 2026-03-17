@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Import(TestcontainersConfiguration.class)
 @ActiveProfiles("test")
 @Transactional
-@DisplayName("ParkVehicleService (integração)")
+@DisplayName("ParkVehicleService (integration)")
 class ParkVehicleServiceIntegrationTest {
 
     private static final String LICENSE_PLATE = "ZUL0001";
@@ -76,7 +76,7 @@ class ParkVehicleServiceIntegrationTest {
         testDataCleaner.cleanAll();
 
         occupancy = new GarageOccupancy(100);
-        occupancy.setOccupiedCount(30); // 30% ocupação -> adjustment 0 -> hourlyPrice = 10.00
+        occupancy.setOccupiedCount(30); // 30% occupancy -> adjustment 0 -> hourlyPrice = 10.00
         garageOccupancyPort.save(occupancy);
 
         sector = garageSectorPort.save(
@@ -87,11 +87,11 @@ class ParkVehicleServiceIntegrationTest {
     }
 
     @Nested
-    @DisplayName("PARKED com sucesso")
+    @DisplayName("PARKED successfully")
     class ParkedComSucesso {
 
         @Test
-        @DisplayName("verifica persistência real (status, spot, sector, hourlyPriceApplied, parkedTime)")
+        @DisplayName("verifies real persistence (status, spot, sector, hourlyPriceApplied, parkedTime)")
         void verificaPersistenciaRealNoBanco() {
             entryVehicleService.processEntry(LICENSE_PLATE, ENTRY_TIME);
 
@@ -113,7 +113,7 @@ class ParkVehicleServiceIntegrationTest {
         }
 
         @Test
-        @DisplayName("verifica que o spot ficou ocupado no banco")
+        @DisplayName("verifies that the spot became occupied in the database")
         void verificaSpotFicouOcupadoNoBanco() {
             entryVehicleService.processEntry(LICENSE_PLATE, ENTRY_TIME);
 

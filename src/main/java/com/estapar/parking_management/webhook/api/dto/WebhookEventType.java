@@ -3,9 +3,9 @@ package com.estapar.parking_management.webhook.api.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Tipos de evento suportados pelo webhook do simulador externo.
+ * Event types supported by the external simulator webhook.
  */
-@Schema(description = "Tipos de evento suportados pelo webhook")
+@Schema(description = "Event types supported by the webhook")
 public enum WebhookEventType {
     ENTRY,
     PARKED,

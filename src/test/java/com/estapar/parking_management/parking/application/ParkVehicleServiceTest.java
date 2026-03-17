@@ -62,7 +62,7 @@ class ParkVehicleServiceTest {
     }
 
     @Nested
-    @DisplayName("Validação de entrada")
+    @DisplayName("Input validation")
     class ValidacaoEntrada {
 
         @Test
@@ -99,11 +99,11 @@ class ParkVehicleServiceTest {
     }
 
     @Nested
-    @DisplayName("Regras de negócio")
+    @DisplayName("Business rules")
     class RegrasNegocio {
 
         @Test
-        @DisplayName("Sessão ativa não encontrada -> ActiveSessionNotFoundException")
+        @DisplayName("Active session not found -> ActiveSessionNotFoundException")
         void sessaoAtivaNaoEncontrada_throwsActiveSessionNotFoundException() {
             when(parkingSessionPort.findActiveByLicensePlateWithLock(LICENSE_PLATE)).thenReturn(Optional.empty());
 
@@ -116,7 +116,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Sessão com status diferente de ENTERED -> InvalidSessionTransitionException")
+        @DisplayName("Session with status other than ENTERED -> InvalidSessionTransitionException")
         void sessaoComStatusDiferenteDeEntered_throwsInvalidSessionTransitionException() {
             ParkingSession session = createEnteredSession();
             session.setStatus(ParkingSessionStatus.PARKED);
@@ -133,7 +133,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Spot não encontrado nas coordenadas -> SpotNotFoundException")
+        @DisplayName("Spot not found at coordinates -> SpotNotFoundException")
         void spotNaoEncontrado_throwsSpotNotFoundException() {
             ParkingSession session = createEnteredSession();
             when(parkingSessionPort.findActiveByLicensePlateWithLock(LICENSE_PLATE)).thenReturn(Optional.of(session));
@@ -150,7 +150,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Spot já ocupado -> SpotAlreadyOccupiedException")
+        @DisplayName("Spot already occupied -> SpotAlreadyOccupiedException")
         void spotJaOcupado_throwsSpotAlreadyOccupiedException() {
             ParkingSession session = createEnteredSession();
             GarageSector sector = createSector();
@@ -170,11 +170,11 @@ class ParkVehicleServiceTest {
     }
 
     @Nested
-    @DisplayName("Fluxo de sucesso")
+    @DisplayName("Success flow")
     class FluxoSucesso {
 
         @Test
-        @DisplayName("Atualiza status para PARKED")
+        @DisplayName("Updates status to PARKED")
         void atualizaStatusParaParked() {
             ParkingSession session = createEnteredSession();
             ParkingSpot spot = createSpot();
@@ -195,7 +195,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Associa spot à sessão")
+        @DisplayName("Associates spot to session")
         void associaSpotASessao() {
             ParkingSession session = createEnteredSession();
             ParkingSpot spot = createSpot();
@@ -212,7 +212,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Associa sector à sessão via spot.getSector()")
+        @DisplayName("Associates sector to session via spot.getSector()")
         void associaSectorASessao() {
             ParkingSession session = createEnteredSession();
             ParkingSpot spot = createSpot();
@@ -229,7 +229,7 @@ class ParkVehicleServiceTest {
         }
 
         @Test
-        @DisplayName("Define parkedTime não nulo, próximo de now")
+        @DisplayName("Sets parkedTime non-null, close to now")
         void defineParkedTime() {
             ParkingSession session = createEnteredSession();
             ParkingSpot spot = createSpot();

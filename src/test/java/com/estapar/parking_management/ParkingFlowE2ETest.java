@@ -27,8 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Testes E2E via HTTP do fluxo completo de estacionamento.
- * Usa MockMvc com contexto completo, sem @Transactional para garantir commits reais.
+ * E2E tests via HTTP for the full parking flow.
+ * Uses MockMvc with full context, without @Transactional to ensure real commits.
  */
 @SpringBootTest
 @Import(TestcontainersConfiguration.class)
@@ -72,11 +72,11 @@ class ParkingFlowE2ETest {
     }
 
     @Nested
-    @DisplayName("Fluxo completo ENTRY -> PARKED -> EXIT")
+    @DisplayName("Full flow ENTRY -> PARKED -> EXIT")
     class FluxoCompleto {
 
         @Test
-        @DisplayName("envia 3 POSTs /webhook e verifica revenue calculado (2h * 10.00 = 20.00)")
+        @DisplayName("sends 3 POSTs to /webhook and verifies calculated revenue (2h * 10.00 = 20.00)")
         void fluxoCompletoEntryParkedExit_verificaRevenue() throws Exception {
             String entryPayload = """
                     {"license_plate":"%s","entry_time":"2025-01-01T12:00:00","event_type":"ENTRY"}
@@ -114,11 +114,11 @@ class ParkingFlowE2ETest {
     }
 
     @Nested
-    @DisplayName("Caso especial ENTRY -> EXIT sem PARKED")
+    @DisplayName("Special case ENTRY -> EXIT without PARKED")
     class EntryExitSemParked {
 
         @Test
-        @DisplayName("envia ENTRY + EXIT sem PARKED, verifica amount = 0")
+        @DisplayName("sends ENTRY + EXIT without PARKED, verifies amount = 0")
         void entryExitSemParked_amountZero() throws Exception {
             String entryPayload = """
                     {"license_plate":"%s","entry_time":"2025-01-01T12:00:00","event_type":"ENTRY"}

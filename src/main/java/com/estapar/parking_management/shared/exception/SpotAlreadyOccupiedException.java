@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando uma vaga já está ocupada.
+ * Exception thrown when a spot is already occupied.
  */
 public final class SpotAlreadyOccupiedException extends ConflictException {
 

@@ -6,8 +6,8 @@ import java.time.Instant;
 import java.util.Objects;
 
 /**
- * Entidade de domínio que representa uma vaga de estacionamento.
- * POJO puro - sem dependências de framework ou persistência.
+ * Domain entity representing a parking spot.
+ * Pure POJO - no framework or persistence dependencies.
  */
 public class ParkingSpot {
 

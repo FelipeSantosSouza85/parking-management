@@ -1,8 +1,8 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção para conflito de estado ou regra de negócio.
- * Mapeada para HTTP 409 Conflict.
+ * Exception for state or business rule conflict.
+ * Mapped to HTTP 409 Conflict.
  */
 public class ConflictException extends RuntimeException {
 

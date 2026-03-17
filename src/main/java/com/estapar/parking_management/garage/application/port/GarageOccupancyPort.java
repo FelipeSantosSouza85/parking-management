@@ -5,8 +5,8 @@ import com.estapar.parking_management.garage.domain.GarageOccupancy;
 import java.util.Optional;
 
 /**
- * Port para operações de persistência de GarageOccupancy.
- * Contrato usado pela camada de aplicação, implementado pela infraestrutura.
+ * Port for GarageOccupancy persistence operations.
+ * Contract used by the application layer, implemented by infrastructure.
  */
 public interface GarageOccupancyPort {
 

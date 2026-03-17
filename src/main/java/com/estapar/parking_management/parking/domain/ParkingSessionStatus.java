@@ -1,15 +1,15 @@
 package com.estapar.parking_management.parking.domain;
 
 /**
- * Status do ciclo de vida de uma sessão de estacionamento.
+ * Lifecycle status of a parking session.
  */
 public enum ParkingSessionStatus {
-    /** Veículo entrou na garagem */
+    /** Vehicle entered the garage */
     ENTERED,
-    /** Veículo estacionou em uma vaga */
+    /** Vehicle parked in a spot */
     PARKED,
-    /** Veículo saiu da garagem */
+    /** Vehicle exited the garage */
     EXITED,
-    /** Veículo rejeitado na entrada (garagem cheia) */
+    /** Vehicle rejected at entry (garage full) */
     REJECTED
 }

@@ -34,8 +34,8 @@ public class ParkingSpotMapper {
     }
 
     /**
-     * Converte domain para entity. O sectorEntity deve ser a referência JPA
-     * já persistida (obtida via repositório) para evitar duplicação de setores.
+     * Converts domain to entity. The sectorEntity must be the already-persisted JPA
+     * reference (obtained via repository) to avoid sector duplication.
      */
     public ParkingSpotEntity toEntity(ParkingSpot domain, GarageSectorEntity sectorEntity) {
         if (domain == null) {

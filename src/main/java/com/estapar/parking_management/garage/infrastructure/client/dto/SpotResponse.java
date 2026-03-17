@@ -1,7 +1,7 @@
 package com.estapar.parking_management.garage.infrastructure.client.dto;
 
 /**
- * DTO para representar uma vaga retornada pelo simulador.
+ * DTO representing a spot returned by the simulator.
  */
 public record SpotResponse(
         Integer id,

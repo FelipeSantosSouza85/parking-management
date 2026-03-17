@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando não existe sessão ativa para a placa informada.
+ * Exception thrown when no active session exists for the given license plate.
  */
 public final class ActiveSessionNotFoundException extends ResourceNotFoundException {
 

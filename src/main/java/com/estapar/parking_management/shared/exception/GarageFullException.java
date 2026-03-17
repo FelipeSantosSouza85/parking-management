@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando a garagem está cheia e não há vagas disponíveis.
+ * Exception thrown when the garage is full and no spots are available.
  */
 public final class GarageFullException extends ConflictException {
 

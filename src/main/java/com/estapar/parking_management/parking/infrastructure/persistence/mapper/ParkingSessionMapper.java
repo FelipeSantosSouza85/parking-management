@@ -50,9 +50,9 @@ public class ParkingSessionMapper {
     }
 
     /**
-     * Converte domain para entity. O parkingSpotEntity e sectorEntity devem ser
-     * referências JPA já persistidas (obtidas via repositório) para evitar duplicação.
-     * Ambos podem ser null quando a sessão não está em status PARKED.
+     * Converts domain to entity. The parkingSpotEntity and sectorEntity must be
+     * already-persisted JPA references (obtained via repository) to avoid duplication.
+     * Both may be null when the session is not in PARKED status.
      */
     public ParkingSessionEntity toEntity(ParkingSession domain,
                                           ParkingSpotEntity parkingSpotEntity,

@@ -63,11 +63,11 @@ class GarageSynchronizationServiceTest {
     }
 
     @Nested
-    @DisplayName("Sincronização de setores")
+    @DisplayName("Sector synchronization")
     class SectorSynchronization {
 
         @Test
-        @DisplayName("deve criar novo setor quando não existir")
+        @DisplayName("should create new sector when it does not exist")
         void shouldCreateNewSectorWhenNotExists() {
             // Given
             SectorResponse sectorResponse = new SectorResponse(
@@ -101,7 +101,7 @@ class GarageSynchronizationServiceTest {
         }
 
         @Test
-        @DisplayName("deve atualizar setor existente preservando identidade")
+        @DisplayName("should update existing sector preserving identity")
         void shouldUpdateExistingSector() {
             // Given
             GarageSector existingSector = new GarageSector(
@@ -135,11 +135,11 @@ class GarageSynchronizationServiceTest {
     }
 
     @Nested
-    @DisplayName("Sincronização de vagas")
+    @DisplayName("Spot synchronization")
     class SpotSynchronization {
 
         @Test
-        @DisplayName("deve criar nova vaga quando não existir")
+        @DisplayName("should create new spot when it does not exist")
         void shouldCreateNewSpotWhenNotExists() {
             // Given
             GarageSector sector = new GarageSector(
@@ -183,7 +183,7 @@ class GarageSynchronizationServiceTest {
         }
 
         @Test
-        @DisplayName("deve atualizar vaga existente preservando status de ocupação do simulador")
+        @DisplayName("should update existing spot preserving simulator occupancy status")
         void shouldUpdateExistingSpotPreservingOccupiedStatus() {
             // Given
             GarageSector sector = new GarageSector(
@@ -221,7 +221,7 @@ class GarageSynchronizationServiceTest {
         }
 
         @Test
-        @DisplayName("deve ignorar vaga com setor desconhecido")
+        @DisplayName("should ignore spot with unknown sector")
         void shouldIgnoreSpotWithUnknownSector() {
             // Given
             SectorResponse sectorResponse = new SectorResponse(
@@ -249,11 +249,11 @@ class GarageSynchronizationServiceTest {
     }
 
     @Nested
-    @DisplayName("Cálculo de ocupação")
+    @DisplayName("Occupancy calculation")
     class OccupancyCalculation {
 
         @Test
-        @DisplayName("deve calcular ocupação a partir dos dados do simulador")
+        @DisplayName("should calculate occupancy from simulator data")
         void shouldCalculateOccupancyFromSimulatorData() {
             // Given
             SectorResponse sectorA = new SectorResponse("A", new BigDecimal("40.50"), 10, "08:00", "22:00", 120);
@@ -295,11 +295,11 @@ class GarageSynchronizationServiceTest {
     }
 
     @Nested
-    @DisplayName("Tratamento de erros")
+    @DisplayName("Error handling")
     class ErrorHandling {
 
         @Test
-        @DisplayName("deve propagar exceção quando client falhar")
+        @DisplayName("should propagate exception when client fails")
         void shouldPropagateExceptionWhenClientFails() {
             // Given
             when(simulatorClient.fetchGarageConfiguration())
@@ -312,7 +312,7 @@ class GarageSynchronizationServiceTest {
         }
 
         @Test
-        @DisplayName("deve lançar exceção quando lista de setores estiver vazia")
+        @DisplayName("should throw exception when sector list is empty")
         void shouldThrowWhenSectorsListIsEmpty() {
             // Given
             GarageConfigurationResponse config = new GarageConfigurationResponse(List.of(), List.of());
@@ -327,7 +327,7 @@ class GarageSynchronizationServiceTest {
         }
 
         @Test
-        @DisplayName("deve normalizar lista nula de setores para vazia e lançar exceção")
+        @DisplayName("should normalize null sector list to empty and throw exception")
         void shouldNormalizeNullSectorsListAndThrow() {
             // Given - compact constructor normaliza null → List.of()
             GarageConfigurationResponse config = new GarageConfigurationResponse(null, List.of());

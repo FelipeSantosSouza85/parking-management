@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 /**
- * Serviço responsável por processar a saída de veículos da garagem.
- * Centraliza as regras de negócio do use case EXIT.
- * Lida com dois cenários: PARKED → EXITED (cobra pelo tempo) e ENTERED → EXITED (cobrança zero).
+ * Service responsible for processing vehicle exits from the garage.
+ * Centralizes business rules for the EXIT use case.
+ * Handles two scenarios: PARKED → EXITED (charges for time) and ENTERED → EXITED (zero charge).
  */
 @Service
 public class ExitVehicleService {
@@ -48,14 +48,14 @@ public class ExitVehicleService {
     }
 
     /**
-     * Processa a saída de um veículo da garagem.
-     * Fluxo completo dentro de uma única transação.
+     * Processes a vehicle exit from the garage.
+     * Full flow within a single transaction.
      *
-     * @param licensePlate placa do veículo
-     * @param exitTime     data/hora da saída (convertida para Instant UTC internamente)
-     * @throws ValidationException                se licensePlate ou exitTime forem inválidos
-     * @throws ActiveSessionNotFoundException    se não existir sessão ativa para a placa
-     * @throws IllegalStateException             se GarageOccupancy não for encontrada
+     * @param licensePlate vehicle license plate
+     * @param exitTime     exit date/time (converted to Instant UTC internally)
+     * @throws ValidationException                if licensePlate or exitTime are invalid
+     * @throws ActiveSessionNotFoundException    if no active session exists for the plate
+     * @throws IllegalStateException             if GarageOccupancy is not found
      */
     @Transactional
     public void processExit(String licensePlate, LocalDateTime exitTime) {
@@ -80,7 +80,7 @@ public class ExitVehicleService {
             spot.release();
             parkingSpotPort.save(spot);
         } else {
-            // ENTERED -> EXITED: sem estacionar, cobrança zero
+            // ENTERED -> EXITED: no parking, zero charge
             session.setChargedAmount(BigDecimal.ZERO);
         }
 

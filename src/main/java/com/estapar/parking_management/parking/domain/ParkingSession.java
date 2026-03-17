@@ -8,9 +8,9 @@ import java.time.Instant;
 import java.util.Objects;
 
 /**
- * Entidade de domínio que representa uma sessão de estacionamento.
- * POJO puro - sem dependências de framework ou persistência.
- * Transições de estado são controladas na camada de aplicação.
+ * Domain entity representing a parking session.
+ * Pure POJO - no framework or persistence dependencies.
+ * State transitions are controlled in the application layer.
  */
 public class ParkingSession {
 

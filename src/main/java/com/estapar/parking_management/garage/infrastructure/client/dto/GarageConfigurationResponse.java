@@ -3,7 +3,7 @@ package com.estapar.parking_management.garage.infrastructure.client.dto;
 import java.util.List;
 
 /**
- * DTO raiz para representar a configuração completa da garagem retornada pelo simulador.
+ * Root DTO representing the full garage configuration returned by the simulator.
  */
 public record GarageConfigurationResponse(
         List<SectorResponse> garage,

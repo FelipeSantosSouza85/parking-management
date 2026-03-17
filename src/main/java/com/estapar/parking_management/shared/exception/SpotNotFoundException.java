@@ -1,7 +1,7 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção lançada quando uma vaga não é encontrada nas coordenadas informadas.
+ * Exception thrown when a spot is not found at the given coordinates.
  */
 public final class SpotNotFoundException extends ResourceNotFoundException {
 

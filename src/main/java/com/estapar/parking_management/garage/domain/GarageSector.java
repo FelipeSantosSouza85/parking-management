@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- * Entidade de domínio que representa um setor da garagem.
- * POJO puro - sem dependências de framework ou persistência.
+ * Domain entity representing a garage sector.
+ * Pure POJO - no framework or persistence dependencies.
  */
 public class GarageSector {
 

@@ -5,8 +5,8 @@ import com.estapar.parking_management.parking.domain.ParkingSession;
 import java.util.Optional;
 
 /**
- * Port para operações de persistência de ParkingSession.
- * Contrato usado pela camada de aplicação, implementado pela infraestrutura.
+ * Port for ParkingSession persistence operations.
+ * Contract used by the application layer, implemented by infrastructure.
  */
 public interface ParkingSessionPort {
 

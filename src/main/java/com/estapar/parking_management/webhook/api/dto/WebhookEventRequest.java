@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
- * DTO unificado para o payload de eventos do webhook.
- * Campos nullable conforme o tipo de evento (ex: entryTime só vem no ENTRY, lat/lng só no PARKED).
- * Datas são recebidas como LocalDateTime (ex: "2026-03-13T21:15:33") e convertidas para Instant (UTC) nos services.
+ * Unified DTO for webhook event payload.
+ * Fields are nullable according to event type (e.g. entryTime only in ENTRY, lat/lng only in PARKED).
+ * Dates are received as LocalDateTime (e.g. "2026-03-13T21:15:33") and converted to Instant (UTC) in services.
  */
 public record WebhookEventRequest(
         String licensePlate,

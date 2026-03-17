@@ -23,16 +23,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Serviço responsável pela sincronização do estado da garagem com o simulador externo.
- * Obtém a configuração (setores e vagas) do simulador, persiste ou atualiza os dados
- * localmente e mantém o agregado de ocupação (GarageOccupancy) atualizado.
- * Utiliza operações em lote (batch) para otimizar o número de round-trips ao banco.
+ * Service responsible for synchronizing garage state with the external simulator.
+ * Fetches configuration (sectors and spots) from the simulator, persists or updates data
+ * locally, and keeps the occupancy aggregate (GarageOccupancy) up to date.
+ * Uses batch operations to optimize the number of database round-trips.
  */
 @Service
 public class GarageSynchronizationService {
 
     private static final Logger log = LoggerFactory.getLogger(GarageSynchronizationService.class);
-    /** Formato esperado para horários (ex.: "08:00", "22:00"). */
+    /** Expected format for times (e.g. "08:00", "22:00"). */
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     private final GarageSimulatorClient simulatorClient;
@@ -41,12 +41,12 @@ public class GarageSynchronizationService {
     private final GarageOccupancyPort occupancyPort;
 
     /**
-     * Constrói o serviço de sincronização com as dependências necessárias.
+     * Builds the synchronization service with required dependencies.
      *
-     * @param simulatorClient cliente para obter a configuração do simulador
-     * @param sectorPort     port de persistência de setores
-     * @param spotPort       port de persistência de vagas
-     * @param occupancyPort  port de persistência do agregado de ocupação
+     * @param simulatorClient client to fetch simulator configuration
+     * @param sectorPort     port for sector persistence
+     * @param spotPort       port for spot persistence
+     * @param occupancyPort  port for occupancy aggregate persistence
      */
     public GarageSynchronizationService(
             GarageSimulatorClient simulatorClient,
@@ -61,11 +61,11 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Sincroniza o estado completo da garagem com o simulador.
-     * Fluxo: (1) busca configuração do simulador, (2) sincroniza setores em lote,
-     * (3) sincroniza vagas em lote, (4) atualiza o agregado de ocupação.
+     * Synchronizes the full garage state with the simulator.
+     * Flow: (1) fetch simulator configuration, (2) synchronize sectors in batch,
+     * (3) synchronize spots in batch, (4) update occupancy aggregate.
      *
-     * @throws IllegalArgumentException se a configuração não contiver ao menos um setor
+     * @throws IllegalArgumentException if configuration does not contain at least one sector
      */
     @Transactional
     public void synchronize() {
@@ -84,10 +84,10 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Sincroniza os setores: carrega existentes em lote, atualiza ou cria, persiste em lote.
+     * Synchronizes sectors: loads existing in batch, updates or creates, persists in batch.
      *
-     * @param sectors lista de setores retornados pelo simulador
-     * @return mapa código do setor → setor persistido
+     * @param sectors list of sectors returned by the simulator
+     * @return map of sector code → persisted sector
      */
     private Map<String, GarageSector> synchronizeSectors(List<SectorResponse> sectors) {
         if (sectors.isEmpty()) {
@@ -110,10 +110,10 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Busca setores existentes pelos códigos e monta mapa.
+     * Fetches existing sectors by codes and builds a map.
      *
-     * @param sectorCodes códigos dos setores a buscar
-     * @return mapa código → setor (vazio para setores inexistentes)
+     * @param sectorCodes sector codes to look up
+     * @return map of code → sector (empty for non-existent sectors)
      */
     private Map<String, GarageSector> findAndcreateMapSectorsByCode(List<String> sectorCodes) {
         return sectorPort.findAllBySectorCodeIn(sectorCodes)
@@ -122,11 +122,11 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Monta a lista de setores para persistência: atualiza existentes ou cria novos.
+     * Builds the list of sectors for persistence: updates existing or creates new ones.
      *
-     * @param sectors respostas do simulador
-     * @param mapSectorByCode setores já existentes no banco, indexados por código
-     * @return lista pronta para saveAll
+     * @param sectors simulator responses
+     * @param mapSectorByCode sectors already in the database, indexed by code
+     * @return list ready for saveAll
      */
     private List<GarageSector> buildSectors(List<SectorResponse> sectors, Map<String, GarageSector> mapSectorByCode) {
         return sectors.stream()
@@ -150,11 +150,11 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Sincroniza as vagas: filtra inválidas, carrega existentes em lote, atualiza ou cria, persiste em lote.
+     * Synchronizes spots: filters invalid ones, loads existing in batch, updates or creates, persists in batch.
      *
-     * @param spots vagas retornadas pelo simulador
-     * @param sectorsBySectorCode  setores já sincronizados (necessário para referência)
-     * @return quantidade de vagas ocupadas após a sincronização
+     * @param spots spots returned by the simulator
+     * @param sectorsBySectorCode  already synchronized sectors (required for reference)
+     * @return number of occupied spots after synchronization
      */
     private Long synchronizeSpots(List<SpotResponse> spots, Map<String, GarageSector> sectorsBySectorCode) {
         if (spots.isEmpty()) {
@@ -182,11 +182,11 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Filtra vagas que referenciam setores inexistentes (são ignoradas com log de aviso).
+     * Filters spots that reference non-existent sectors (ignored with warning log).
      *
-     * @param spots vagas a validar
-     * @param sectorsBySectorCode  setores conhecidos
-     * @return apenas vagas cujo setor existe
+     * @param spots spots to validate
+     * @param sectorsBySectorCode  known sectors
+     * @return only spots whose sector exists
      */
     private List<SpotResponse> validateSpots(List<SpotResponse> spots, Map<String, GarageSector> sectorsBySectorCode) {
         return spots.stream()
@@ -201,10 +201,10 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Busca vagas existentes pelos IDs externos e monta mapa para lookup.
+     * Fetches existing spots by external IDs and builds a lookup map.
      *
-     * @param spotIds IDs externos das vagas (do simulador)
-     * @return mapa externalSpotId → vaga
+     * @param spotIds external spot IDs (from simulator)
+     * @return map of externalSpotId → spot
      */
     private Map<Integer, ParkingSpot> findAndcreateMapSpotsById(List<Integer> spotIds) {
         return spotPort.findAllByExternalSpotIdIn(spotIds).stream()
@@ -212,12 +212,12 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Cria nova vaga ou atualiza existente com dados do simulador.
+     * Creates a new spot or updates an existing one with simulator data.
      *
-     * @param response dados da vaga vindos do simulador
-     * @param sector setor associado (já sincronizado)
-     * @param mapSpotById vagas existentes indexadas por externalSpotId
-     * @return vaga pronta para persistência
+     * @param response spot data from the simulator
+     * @param sector associated sector (already synchronized)
+     * @param mapSpotById existing spots indexed by externalSpotId
+     * @return spot ready for persistence
      */
     private ParkingSpot buildOrUpdateSpot(SpotResponse response, GarageSector sector, Map<Integer, ParkingSpot> mapSpotById) {
         boolean occupied = Boolean.TRUE.equals(response.occupied());
@@ -230,10 +230,10 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Soma a capacidade máxima de todos os setores.
+     * Sums the maximum capacity of all sectors.
      *
-     * @param sectorsBySectorCode setores sincronizados
-     * @return capacidade total da garagem
+     * @param sectorsBySectorCode synchronized sectors
+     * @return total garage capacity
      */
     private int calculateTotalCapacity(Map<String, GarageSector> sectorsBySectorCode) {
         return sectorsBySectorCode.values().stream()
@@ -242,10 +242,10 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Atualiza o agregado de ocupação: remove registros antigos e persiste o novo estado.
+     * Updates the occupancy aggregate: removes old records and persists the new state.
      *
-     * @param totalCapacity capacidade total da garagem
-     * @param occupiedCount quantidade de vagas ocupadas
+     * @param totalCapacity total garage capacity
+     * @param occupiedCount number of occupied spots
      */
     private void synchronizeOccupancy(int totalCapacity, Long occupiedCount) {
         occupancyPort.deleteAll();
@@ -258,11 +258,11 @@ public class GarageSynchronizationService {
     }
 
     /**
-     * Converte string no formato "HH:mm" para LocalTime.
-     * Retorna LocalTime.MIDNIGHT se nulo ou em branco.
+     * Converts a string in "HH:mm" format to LocalTime.
+     * Returns LocalTime.MIDNIGHT if null or blank.
      *
-     * @param time string no formato "HH:mm" (ex.: "08:00")
-     * @return horário parseado ou meia-noite como fallback
+     * @param time string in "HH:mm" format (e.g. "08:00")
+     * @return parsed time or midnight as fallback
      */
     private LocalTime parseTime(String time) {
         if (time == null || time.isBlank()) {

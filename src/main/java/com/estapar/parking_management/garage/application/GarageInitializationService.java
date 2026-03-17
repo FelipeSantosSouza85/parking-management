@@ -7,7 +7,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Serviço responsável por inicializar os dados da garagem na startup da aplicação.
+ * Service responsible for initializing garage data at application startup.
  */
 @Component
 public class GarageInitializationService {

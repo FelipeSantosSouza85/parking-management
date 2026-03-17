@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller de teste para disparar exceções e validar o GlobalExceptionHandler.
+ * Test controller to trigger exceptions and validate GlobalExceptionHandler.
  */
 @RestController
 @RequestMapping("/test/exceptions")

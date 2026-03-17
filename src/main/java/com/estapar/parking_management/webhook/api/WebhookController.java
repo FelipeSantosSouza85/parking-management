@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 /**
- * Controller REST que recebe eventos do simulador externo via webhook.
+ * REST controller that receives events from the external simulator via webhook.
  */
 @RestController
 public class WebhookController {
@@ -46,19 +46,19 @@ public class WebhookController {
     }
 
     @Operation(
-            summary = "Receber evento do webhook",
-            description = "Processa eventos ENTRY (entrada de veículo), PARKED (confirmação de estacionamento) e EXIT (saída de veículo) enviados pelo simulador externo."
+            summary = "Receive webhook event",
+            description = "Processes ENTRY (vehicle entry), PARKED (parking confirmation) and EXIT (vehicle exit) events sent by the external simulator."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Evento processado com sucesso",
+            @ApiResponse(responseCode = "200", description = "Event processed successfully",
                     content = @Content(schema = @Schema(implementation = WebhookEventResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Payload inválido",
+            @ApiResponse(responseCode = "400", description = "Invalid payload",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
+            @ApiResponse(responseCode = "404", description = "Resource not found",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
-            @ApiResponse(responseCode = "409", description = "Regra de negócio violada",
+            @ApiResponse(responseCode = "409", description = "Business rule violated",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Erro inesperado",
+            @ApiResponse(responseCode = "500", description = "Unexpected error",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     @PostMapping("/webhook")

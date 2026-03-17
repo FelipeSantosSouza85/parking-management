@@ -1,8 +1,8 @@
 package com.estapar.parking_management.shared.exception;
 
 /**
- * Exceção para recurso não encontrado.
- * Mapeada para HTTP 404 Not Found.
+ * Exception for resource not found.
+ * Mapped to HTTP 404 Not Found.
  */
 public class ResourceNotFoundException extends RuntimeException {
 

@@ -51,11 +51,11 @@ class ParkingSpotRepositoryTest {
     }
 
     @Nested
-    @DisplayName("CRUD básico")
+    @DisplayName("Basic CRUD")
     class CrudOperations {
 
         @Test
-        @DisplayName("deve persistir e recuperar spot por ID")
+        @DisplayName("should persist and retrieve spot by ID")
         void shouldPersistAndRetrieveById() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
 
@@ -77,7 +77,7 @@ class ParkingSpotRepositoryTest {
     class FindByLatAndLng {
 
         @Test
-        @DisplayName("deve encontrar spot por coordenadas")
+        @DisplayName("should find spot by coordinates")
         void shouldFindByLatAndLng() {
             parkingSpotPort.save(new ParkingSpot(1, sector, -23.55, -46.63, false));
 
@@ -88,7 +88,7 @@ class ParkingSpotRepositoryTest {
         }
 
         @Test
-        @DisplayName("deve retornar vazio para coordenadas inexistentes")
+        @DisplayName("should return empty for non-existent coordinates")
         void shouldReturnEmptyForNonExistentCoordinates() {
             Optional<ParkingSpot> result = parkingSpotPort.findByLatAndLngWithLock(0.0, 0.0);
 
@@ -101,7 +101,7 @@ class ParkingSpotRepositoryTest {
     class FindByExternalSpotId {
 
         @Test
-        @DisplayName("deve encontrar spot por externalSpotId")
+        @DisplayName("should find spot by externalSpotId")
         void shouldFindByExternalSpotId() {
             parkingSpotPort.save(new ParkingSpot(42, sector, -23.55, -46.63, false));
 
@@ -112,7 +112,7 @@ class ParkingSpotRepositoryTest {
         }
 
         @Test
-        @DisplayName("deve retornar vazio para externalSpotId inexistente")
+        @DisplayName("should return empty for non-existent externalSpotId")
         void shouldReturnEmptyForNonExistentExternalSpotId() {
             Optional<ParkingSpot> result = parkingSpotPort.findByExternalSpotId(999);
 
@@ -125,7 +125,7 @@ class ParkingSpotRepositoryTest {
     class UniqueConstraints {
 
         @Test
-        @DisplayName("deve rejeitar external_spot_id duplicado")
+        @DisplayName("should reject duplicate external_spot_id")
         void shouldRejectDuplicateExternalSpotId() {
             parkingSpotPort.save(new ParkingSpot(1, sector, -23.55, -46.63, false));
 
@@ -134,7 +134,7 @@ class ParkingSpotRepositoryTest {
         }
 
         @Test
-        @DisplayName("deve rejeitar coordenadas (lat, lng) duplicadas")
+        @DisplayName("should reject duplicate coordinates (lat, lng)")
         void shouldRejectDuplicateCoordinates() {
             parkingSpotPort.save(new ParkingSpot(1, sector, -23.55, -46.63, false));
 
@@ -144,11 +144,11 @@ class ParkingSpotRepositoryTest {
     }
 
     @Nested
-    @DisplayName("Estado de ocupação persistido")
+    @DisplayName("Persisted occupancy state")
     class OccupiedState {
 
         @Test
-        @DisplayName("deve persistir estado de ocupação após occupy()")
+        @DisplayName("should persist occupancy state after occupy()")
         void shouldPersistOccupiedState() {
             ParkingSpot spot = new ParkingSpot(1, sector, -23.55, -46.63, false);
             spot.occupy();

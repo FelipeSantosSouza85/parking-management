@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 /**
- * Tratamento centralizado de exceções para a API REST.
- * Converte exceções em respostas HTTP padronizadas.
+ * Centralized exception handling for the REST API.
+ * Converts exceptions into standardized HTTP responses.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
