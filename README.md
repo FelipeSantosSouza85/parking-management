@@ -353,9 +353,9 @@ chargedAmount = hourlyPriceApplied × chargeableHours
 
 ## Prerequisites
 
-- **Java 21+** ([Download](https://adoptium.net/))
-- **Maven 3.8+** ([Download](https://maven.apache.org/download.cgi))
-- **Docker and Docker Compose** ([Download](https://www.docker.com/products/docker-desktop/))
+- **Java 21+** 
+- **Maven 3.8+** 
+- **Docker and Docker Compose** 
 
 ---
 
@@ -530,7 +530,7 @@ Revenue is calculated by summing `charged_amount` from all sessions:
 | `server.port` | `3003` | Application port |
 | `spring.datasource.url` | `jdbc:mysql://localhost:3307/parking_management` | MySQL connection URL |
 | `spring.datasource.username` | `root` | Database user |
-| `spring.datasource.password` | `123456` | Database password |
+| `spring.datasource.password` | `****` | Database password |
 | `spring.jpa.hibernate.ddl-auto` | `update` | Schema strategy (update for dev) |
 | `garage.simulator.base-url` | `http://localhost:3000` | Simulator URL |
 | `logging.level.com.estapar` | `DEBUG` | Application log level |
