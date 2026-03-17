@@ -31,3 +31,38 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+
+# Java
+*.class
+
+#Cursor
+.cursor
+
+#Docs
+docs/
+AGENTS.md
