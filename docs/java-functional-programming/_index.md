@@ -1,8 +1,0 @@
-# java-functional-programming index
-
-
-## Chunks
-
-- `docs/java-functional-programming/chunk-01.md` (458 lines) — intro | Role | Goal | Constraints | Examples | Examples - Table of contents | Examples - Example 1: Immutable Objects | Examples - Example 2: State Immutability | Examples - Example 3: Pure Functions | Examples - Example 4: Functional Interfaces | Examples - Example 5: Lambda Expressions | Examples - Example 6: Streams | Examples - Example 7: Functional Programming Paradigms | Examples - Example 8: Leverage Records for Immutable Data Transfer | Examples - Example 9: Employ Pattern Matching for `instanceof` and `switch`
-- `docs/java-functional-programming/chunk-02.md` (490 lines) — Examples - Example 10: Use Switch Expressions for Concise Multi-way Conditionals | Examples - Example 11: Leverage Sealed Classes and Interfaces for Controlled Hierarchies | Examples - Example 12: Create Type-Safe Wrappers for Domain Types | Examples - Example 13: Explore Stream Gatherers for Custom Stream Operations | Examples - Example 14: Use Optional Idiomatically | Examples - Example 15: Currying and Partial Application | Examples - Example 16: Separate Effects from Pure Logic | Examples - Example 17: Collectors Best Practices | Examples - Example 18: Use Record Patterns in Switch | Examples - Example 19: Compose Async Pipelines Functionally | Examples - Example 20: Leverage Laziness and Infinite Streams | Examples - Example 21: Functional Error Handling | Examples - Example 22: Immutable Collections
-- `docs/java-functional-programming/chunk-03.md` (52 lines) — Examples - Example 23: Avoid Shared Mutable State in Concurrency | Output Format | Safeguards
