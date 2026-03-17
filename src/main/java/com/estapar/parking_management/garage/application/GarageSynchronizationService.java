@@ -220,13 +220,12 @@ public class GarageSynchronizationService {
      * @return spot ready for persistence
      */
     private ParkingSpot buildOrUpdateSpot(SpotResponse response, GarageSector sector, Map<Integer, ParkingSpot> mapSpotById) {
-        boolean occupied = Boolean.TRUE.equals(response.occupied());
         ParkingSpot existing = mapSpotById.get(response.id());
         if (existing != null) {
-            existing.updateFrom(sector, response.lat(), response.lng(), occupied);
+            existing.updateFrom(sector, response.lat(), response.lng(), response.occupied());
             return existing;
         }
-        return new ParkingSpot(response.id(), sector, response.lat(), response.lng(), occupied);
+        return new ParkingSpot(response.id(), sector, response.lat(), response.lng(), response.occupied());
     }
 
     /**
